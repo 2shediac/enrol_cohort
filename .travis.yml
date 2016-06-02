@@ -22,12 +22,10 @@ before_install:
   - phpenv config-rm xdebug.ini
   - cd ../..
   - composer selfupdate
+  - composer create-project -n --no-dev --prefer-dist moodlerooms/moodle-plugin-ci ci ^1
+  - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
 
 install:
-  # Mimic how a Moodle plugin would be run.
-  - cp -R tests/Fixture/moodle-local_travis ../moodle-local_travis
-  - export PATH="$(cd bin; pwd):$(cd vendor/bin; pwd):$PATH"
-  - export TRAVIS_BUILD_DIR=$(cd ../moodle-local_travis; pwd)
 
   # Finally, the standard install step.
   - moodle-plugin-ci install
