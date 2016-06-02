@@ -22,7 +22,6 @@ before_install:
   - phpenv config-rm xdebug.ini
   - cd ../..
   - composer selfupdate
-  - composer install --no-interaction --prefer-dist
 
 install:
   # Mimic how a Moodle plugin would be run.
