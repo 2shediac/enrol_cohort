@@ -17,13 +17,14 @@ env:
  matrix:
   - DB=mysqli MOODLE_BRANCH=MOODLE_30_STABLE
 
-install:
+before_install:
   # Several tools complain about xdebug slowdown.
   - phpenv config-rm xdebug.ini
-
+  - cd ../..
   - composer selfupdate
   - composer install --no-interaction --prefer-dist
 
+install:
   # Mimic how a Moodle plugin would be run.
   - cp -R tests/Fixture/moodle-local_travis ../moodle-local_travis
   - export PATH="$(cd bin; pwd):$(cd vendor/bin; pwd):$PATH"
